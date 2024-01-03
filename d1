@@ -1,0 +1,17 @@
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+
+# Pipeline adımlarını bir liste olarak tanımlayın
+steps = [
+    ('scaler', StandardScaler()), # Verileri standartlaştırmak için bir dönüştürücü
+    ('logreg', LogisticRegression()) # Son tahminci olarak bir model
+]
+
+# Pipeline nesnesini oluşturun
+pipe = Pipeline(steps)
+
+# Pipeline'ı verilerinize uygulayın
+pipe.fit(X_train, y_train) # Eğitim verileri ile pipeline'ı eğitin
+pipe.predict(X_test) # Test verileri ile tahmin yapın
+pipe.score(X_test, y_test) # Test verileri ile model performansını ölçün
