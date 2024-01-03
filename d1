@@ -1,17 +1,20 @@
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
+# Faktöriyel hesaplayan bir fonksiyon tanımlayın
+def faktoriyel(sayi):
+    # Sayı sıfır veya bir ise 1 döndürün
+    if sayi == 0 or sayi == 1:
+        return 1
 
-# Pipeline adımlarını bir liste olarak tanımlayın
-steps = [
-    ('scaler', StandardScaler()), # Verileri standartlaştırmak için bir dönüştürücü
-    ('logreg', LogisticRegression()) # Son tahminci olarak bir model
-]
+    # Sayı negatif ise hata mesajı verin
+    elif sayi < 0:
+        print("Negatif sayıların faktöriyeli hesaplanamaz.")
+        return None
 
-# Pipeline nesnesini oluşturun
-pipe = Pipeline(steps)
+    # Sayı pozitif ise, sayı ile fonksiyonun bir azaltılmış değeri için çağrısının çarpımını döndürün
+    else:
+        return sayi * faktoriyel(sayi - 1)
 
-# Pipeline'ı verilerinize uygulayın
-pipe.fit(X_train, y_train) # Eğitim verileri ile pipeline'ı eğitin
-pipe.predict(X_test) # Test verileri ile tahmin yapın
-pipe.score(X_test, y_test) # Test verileri ile model performansını ölçün
+# Kullanıcıdan bir sayı alın
+sayi = int(input("Faktöriyelini hesaplamak istediğiniz sayıyı girin: "))
+
+# Fonksiyonu çağırın ve sonucu ekrana yazdırın
+print(f"{sayi}! = {faktoriyel(sayi)}")
